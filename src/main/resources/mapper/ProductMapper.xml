@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 命名空间 指定当前绑定的一个接口文件 -->
+<mapper namespace="com.its.mapper.ProductMapper">
+
+    <select id="selectAll" resultType="com.its.entity.Products">
+        select * from products
+    </select>
+
+    <select id="queryProductById" resultType="com.its.entity.Products">
+        select * from products where product_id = #{id}
+    </select>
+
+</mapper>

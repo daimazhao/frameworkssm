@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 命名空间 指定当前绑定的一个接口文件 -->
+<mapper namespace="com.its.mapper.StudentMapper">
+
+    <insert id="save">
+        insert into student (name,sex,tel,hobbies,remark)
+        values(#{name},#{sex},#{tel},#{hobbies},#{remark})
+    </insert>
+
+    <update id="updateStudent">
+        update student
+        set  name=#{name},sex=#{sex},tel=#{tel},hobbies=#{hobbies},remark=#{remark}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteStudent">
+        delete from student where id = #{id}
+    </delete>
+
+    <delete id="batchDeleteStudents">
+        delete from student where id in
+        <foreach item="id" collection="ids.split(',')" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="list" resultType="com.its.entity.Student">
+        select * from student
+        <where>
+            <if test="name != null and name !=''">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="sex != null and sex !=''">
+                and sex = #{sex}
+            </if>
+        </where>
+       /**
+        * 动态查询, 如果有其中的一个就可以查询, 如果没有, 则查询所有
+        * @param id 查询id
+        * @param name 查询name
+        * @return 返回查询到的用户对象的List容器
+        */
+    </select>
+
+    <select id="queryStudentById" resultType="com.its.entity.Student">
+        select * from student where id = #{id}
+    </select>
+
+</mapper>

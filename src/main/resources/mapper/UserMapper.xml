@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 命名空间 指定当前绑定的一个接口文件 -->
+<mapper namespace="com.its.mapper.UserMapper">
+
+    <select id="queryByUsername" resultType="com.its.entity.Users">
+        select * from users where username = #{username}
+    </select>
+
+</mapper>
